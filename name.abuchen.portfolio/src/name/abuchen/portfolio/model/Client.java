@@ -516,7 +516,7 @@ public class Client
         return properties;
     }
 
-    /* package */void clearProperties()
+    public void clearProperties()
     {
         properties.clear();
     }
