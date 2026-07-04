@@ -81,9 +81,11 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
 
                         // @formatter:off
                         // AT0000A1QA38 10.01.2022 5.123
+                        // AT0000A1Z882 02.07.2026
                         // @formatter:on
                         .section("date") //
                         .match("^[A-Z]{2}[A-Z0-9]{9}[0-9] (?<date>[\\d]{2}\\.[\\d]{2}\\.[\\d]{4}) [\\.'\\d]+$") //
+                        .match("^[A-Z]{2}[A-Z0-9]{9}[0-9] (?<date>[\\d]{2}\\.[\\d]{2}\\.[\\d]{4})") //
                         .assign((t, v) -> t.setDate(asDate(v.get("date"))))
 
                         // @formatter:off
