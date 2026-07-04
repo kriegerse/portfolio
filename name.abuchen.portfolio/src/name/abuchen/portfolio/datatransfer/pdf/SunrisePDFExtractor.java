@@ -102,9 +102,10 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
 
                         // @formatter:off
                         // Auftrags-Nummer: 20220106123456789000000612345
+                        //  20260701123456789000001944747
                         // @formatter:on
                         .section("note").optional() //
-                        .match("^(?<note>Auftrags\\-Nummer: [\\d]+)$") //
+                        .match("^(?<note>(Auftrags\\-Nummer:)? [\\d]+)$") //
                         .assign((t, v) -> t.setNote(trim(v.get("note"))))
 
                         .wrap(BuySellEntryItem::new);

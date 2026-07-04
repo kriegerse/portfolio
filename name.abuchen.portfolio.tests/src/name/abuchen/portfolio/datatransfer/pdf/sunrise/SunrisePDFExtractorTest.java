@@ -240,7 +240,7 @@ public class SunrisePDFExtractorTest
         assertThat(results, hasItem(purchase( //
                         hasDate("2026-07-02T00:00"), hasShares(0.520), //
                         hasSource("Kauf06.txt"), //
-                        hasNote("Auftrags-Nummer: 20260701123456789000001944747"), //
+                        hasNote("20260701123456789000001944747"), //
                         hasAmount("EUR", 100.24), hasGrossValue("EUR", 100.24), //
                         hasTaxes("EUR", 0.00), hasFees("EUR", 0.00))));
     }
