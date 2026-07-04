@@ -91,9 +91,10 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
 
                         // @formatter:off
                         // Abrechnungsbetrag: 10.00 €
+                        //   100.24 €
                         // @formatter:on
                         .section("amount", "currency") //
-                        .match("^Abrechnungsbetrag: (?<amount>['\\.\\d]+) (?<currency>\\p{Sc})$") //
+                        .match("^(Abrechnungsbetrag:)?\s+(?<amount>['\\.\\d]+) (?<currency>\\p{Sc})$") //
                         .assign((t, v) -> {
                             t.setAmount(asAmount(v.get("amount")));
                             t.setCurrencyCode(asCurrencyCode(v.get("currency")));
