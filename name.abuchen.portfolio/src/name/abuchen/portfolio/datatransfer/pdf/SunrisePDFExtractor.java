@@ -66,10 +66,12 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
                         // @formatter:off
                         // Kauf Standortfonds Österreich 10.00 € 140.59 € 0.071
                         // AT0000A1QA38 10.01.2022 5.123
+                        // Kauf Standortfonds Deutschland 100.24 € 192.77 € 0.520
+                        // AT0000A1Z882 02.07.2026
                         // @formatter:on
                         .section("name", "currency", "isin") //
                         .match("^Kauf (?<name>.*) [\\.'\\d]+ \\p{Sc} [\\.'\\d]+ (?<currency>\\p{Sc}) [\\.'\\d]+$") //
-                        .match("^(?<isin>[A-Z]{2}[A-Z0-9]{9}[0-9]) [\\d]{2}\\.[\\d]{2}\\.[\\d]{4} ['\\.\\d]+$") //
+                        .match("^(?<isin>[A-Z]{2}[A-Z0-9]{9}[0-9]) [\\d]{2}\\.[\\d]{2}\\.[\\d]{4}( ['\\.\\d]+)?$") //
                         .assign((t, v) -> t.setSecurity(getOrCreateSecurity(v)))
 
                         // @formatter:off
@@ -84,8 +86,7 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
                         // AT0000A1Z882 02.07.2026
                         // @formatter:on
                         .section("date") //
-                        .match("^[A-Z]{2}[A-Z0-9]{9}[0-9] (?<date>[\\d]{2}\\.[\\d]{2}\\.[\\d]{4}) [\\.'\\d]+$") //
-                        .match("^[A-Z]{2}[A-Z0-9]{9}[0-9] (?<date>[\\d]{2}\\.[\\d]{2}\\.[\\d]{4})") //
+                        .match("^[A-Z]{2}[A-Z0-9]{9}[0-9] (?<date>[\\d]{2}\\.[\\d]{2}\\.[\\d]{4})( [\\.'\\d]+)?$") //
                         .assign((t, v) -> t.setDate(asDate(v.get("date"))))
 
                         // @formatter:off
