@@ -426,7 +426,10 @@ public class DashboardView extends AbstractHistoricView
                 manager.add(new SimpleAction(Messages.MenuMoveRight, a -> moveDashboard(board, 1)));
 
             if (index > 0)
-                manager.add(new SimpleAction(Messages.ChartBringToFront, a -> bringToFrontDashboard(board)));
+                manager.add(new SimpleAction(Messages.MenuMoveToBeginning, a -> moveDashboardToBeginning(board)));
+
+            if (index < count - 1)
+                manager.add(new SimpleAction(Messages.MenuMoveToEnd, a -> moveDashboardToEnd(board)));
         });
 
         toolItem.setDefaultAction(new SimpleAction(Messages.MenuShow, a -> selectDashboard(board)));
@@ -856,10 +859,19 @@ public class DashboardView extends AbstractHistoricView
         }));
     }
 
-    private void bringToFrontDashboard(Dashboard board)
+    private void moveDashboardToBeginning(Dashboard board)
     {
         getClient().removeDashboard(board);
         getClient().addDashboard(0, board);
+        getClient().touch();
+
+        recreateDashboardToolItems();
+    }
+
+    private void moveDashboardToEnd(Dashboard board)
+    {
+        getClient().removeDashboard(board);
+        getClient().addDashboard(board);
         getClient().touch();
 
         recreateDashboardToolItems();

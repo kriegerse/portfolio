@@ -143,7 +143,10 @@ public class ConfigurationStore
                     manager.add(new SimpleAction(Messages.MenuMoveRight, a -> move(config, 1, toolBar)));
 
                 if (index > 0)
-                    manager.add(new SimpleAction(Messages.ChartBringToFront, a -> moveToFront(config, toolBar)));
+                    manager.add(new SimpleAction(Messages.MenuMoveToBeginning, a -> moveToBeginning(config, toolBar)));
+
+                if (index < count - 1)
+                    manager.add(new SimpleAction(Messages.MenuMoveToEnd, a -> moveToEnd(config, toolBar)));
             });
 
             item.setDefaultAction(new SimpleAction(a -> activate(config)));
@@ -171,10 +174,20 @@ public class ConfigurationStore
         rebuildToolBarItems(toolBar);
     }
 
-    private void moveToFront(Configuration config, ToolBarManager toolBar)
+    private void moveToBeginning(Configuration config, ToolBarManager toolBar)
     {
         configSet.remove(config);
         configSet.add(0, config);
+        client.touch();
+
+        rebuildToolBarItems(toolBar);
+    }
+
+    private void moveToEnd(Configuration config, ToolBarManager toolBar)
+    {
+        configSet.remove(config);
+        configSet.add(config);
+        client.touch();
 
         rebuildToolBarItems(toolBar);
     }

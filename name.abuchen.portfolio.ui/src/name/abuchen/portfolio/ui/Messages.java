@@ -1053,6 +1053,8 @@ public class Messages extends NLS
     public static String MenuMoveDown;
     public static String MenuMoveLeft;
     public static String MenuMoveRight;
+    public static String MenuMoveToBeginning;
+    public static String MenuMoveToEnd;
     public static String MenuMoveUp;
     public static String MenuNewDashboard;
     public static String MenuNewDashboardColumn;
