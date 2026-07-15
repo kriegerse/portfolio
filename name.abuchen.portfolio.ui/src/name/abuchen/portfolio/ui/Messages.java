@@ -1260,7 +1260,6 @@ public class Messages extends NLS
     public static String PortfolioMenuDeleteConfirm;
     public static String PortfolioReportMissingAPIKey;
     public static String PortfolioReportMissingAPIURL;
-    public static String PortfolioReportNotificationMessage;
     public static String PrefAlphaVantageAPIKey;
     public static String PrefAlphaVantageCallFrequencyLimit;
     public static String PrefDoubleClickCellToEdit;
@@ -1440,7 +1439,6 @@ public class Messages extends NLS
     public static String SiteAppLandingpage;
     public static String SiteForum;
     public static String SiteHowTo;
-    public static String SiteInfoPortfolioReportMigration;
     public static String SiteManual;
     public static String SiteNewAndNoteworthy;
     public static String SplitWizardDefinitionDescription;
