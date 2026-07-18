@@ -78,7 +78,7 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
                         // Kauf Standortfonds Österreich 10.00 € 140.59 € 0.071
                         // @formatter:on
                         .section("shares") //
-                        .match("^Kauf .* [\\.'\\d]+ \\p{Sc} [\\.'\\d]+ \\p{Sc} (?<shares>[\\.\\d\\s]+)$") //
+                        .match("^Kauf .* [\.'\\d]+ \\p{Sc} [\.'\\d]+ \\p{Sc} (?<shares>[\.\\d\\\\s]+)$") //
                         .assign((t, v) -> t.setShares(asShares(v.get("shares"))))
 
                         // @formatter:off
@@ -268,15 +268,10 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
                             Money tax = Money.of(EUR, asAmount(v.get("tax")));
                             Money amount = Money.of(EUR, asAmount(v.get("amount")));
 
-                            if (amount.isZero())
-                            {
-                                t.setMonetaryAmount(tax);
-                            }
-                            else
-                            {
-                                t.setAmount(0L);
-                                t.setCurrencyCode(asCurrencyCode("EUR"));
-                            }
+            if (amount.isZero())
+            {
+                t.setMonetaryAmount(tax);
+            }
                         })
 
                         .wrap(t -> {
@@ -295,7 +290,8 @@ public class SunrisePDFExtractor extends AbstractPDFExtractor
                         // abgeführte Kapitalertragsteuer: 31.61 €
                         // @formatter:on
                         .section("tax", "currency").optional() //
-                        .match("^abgef.hrte Kapitalertragsteuer: (?<tax>[\\.'\\d]+) (?<currency>\\p{Sc})$") //
+                        .match("^abgef\\.hrte Kapitalertragsteuer: (?<tax>[\.'\\d]+) (?<currency>\\p{Sc})$") //
+                        .match("^(?<note>abgef\\.hrte Kapitalertragsteuer: [\.'\\d]+ [\\p{Sc}])$") //
                         .assign((t, v) -> processTaxEntries(t, v, type))
 
                         // @formatter:off
